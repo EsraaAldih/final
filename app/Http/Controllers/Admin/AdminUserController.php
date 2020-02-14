@@ -46,7 +46,7 @@ class AdminUserController extends Controller
             $user->password = Hash::make($request->password);
             $user->avatar = $request->avatar;
             $user->save();
-            $user->attachRole('administrator');
+            $user->attachRole('book_store');
         } else {
 
             $user = new User();
@@ -54,7 +54,7 @@ class AdminUserController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->save();
-            $user->attachRole('administrator');
+            $user->attachRole('book_store');
         }
 
         $users = User::paginate(20);

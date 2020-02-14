@@ -5,14 +5,19 @@ return [
         'admin' => [
             'users' => 'c,r,u,d',
             'acl' => 'c,r,u,d',
-            'profile' => 'r,u'
+            'profile' => 'r,u',
+            'books' => 'c,r,u,d'
+
         ],
-        'administrator' => [
-            'users' => 'c,r,u,d',
-            'profile' => 'r,u'
-        ],
+       
         'user' => [
-            'profile' => 'r,u'
+            'profile' => 'r,u',
+            'books' => 'c,r,u,d'
+        ],
+
+        'book_store' => [
+            'profile' => 'r,u',
+            'books' => 'c,r,u,d'
         ],
     ],
     'permission_structure' => [

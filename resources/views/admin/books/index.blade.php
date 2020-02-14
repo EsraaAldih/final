@@ -22,74 +22,79 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                        <form action="delete/book" method="POST">
-	                        		@csrf
-									<div class="btn-group">
-										<div class="animated-checkbox">
-										    <label>
-										        <input type="checkbox" id="check-all"><span class="label-text btn btn-dark"></span>
-										    </label>
-										</div>
-										<div class="form-group">
-										    <label>
-										        {{ Form::button('<i class="fa fa-trash"></i>', ['type'=> 'submit', 'class'=>'btn btn-danger ml-2']) }}
-										    </label>
-										</div>        
-		                            </div>
-                            <table class="table table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>#</th>
-                                        <th>Cover</th>
-                                        <th>Title</th>
-                                        <th>Author</th>
-                                        <th>Price</th>
-                                        <th>Status</th>
-                                        <th>Createor</th>
-                                        <th>Created</th>
-                                        <th>Updated</th>
-                                        <th>Edit</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if($books)
-                                    @foreach($books as $book)
-                                    <tr>	<td>
-													<div class="animated-checkbox">
-														<label>
-															<input class="checkBoxes" type="checkbox" name="checkBoxArray[]" value="{{$book->id}}">
-															<span class="label-text"></span>
-														</label>
-													</div>
-												</td>
-                                        <td>{{ $book->id }}</td>
-                                        <td style="max-width: 200px; max-height: 100px"><img src="{{ asset('$book->cover')}}" style="width: 100px; height:100px"></td>
-                                        <td><a href="#">{{ $book->title }}</a></td>
-                                        <td><a href="#">{{ $book->author }}</a></td>
-                                        <td>{{ $book->price }}Tk.</td>
-                                        <td>{{ $book->status }}</td>
-                                        <td>{{ $book->user->name }}</td>
-                                        <td>{{ $book->created_at->diffForHumans() }}</td>
-                                        <td>{{ $book->updated_at->diffForHumans() }}</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href="{{ route('book.edit', $book->id) }}"><i class="fa fa-edit"></i></a>
-                                            <a class="btn btn-primary btn-sm" href="{{ route('book.show', $book->id) }}"><i class="fa fa-eye"></i></a>
-                                            <form action="{{route('book.destroy' ,$book->id)}}" method="POST" class="d-inline-block">
-                                                @csrf
-                                                @method('DELETE')
+                            <form action="delete/book" method="POST">
+                                @csrf
+                                <div class="btn-group">
+                                    <div class="animated-checkbox">
+                                        <label>
+                                            <input type="checkbox" id="check-all"><span class="label-text btn btn-dark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            {{ Form::button('<i class="fa fa-trash"></i>', ['type'=> 'submit', 'class'=>'btn btn-danger ml-2']) }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>#</th>
+                                            <th>Cover</th>
+                                            <th>Title</th>
+                                            <th>Author</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Status</th>
+                                            <th>Createor</th>
+                                            <th>Created</th>
+                                            <th>Updated</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if($books)
+                                        @foreach($books as $book)
+                                        @if($book->quantity)
+                                        <tr>
+                                            <td>
+                                                <div class="animated-checkbox">
+                                                    <label>
+                                                        <input class="checkBoxes" type="checkbox" name="checkBoxArray[]" value="{{$book->id}}">
+                                                        <span class="label-text"></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>{{ $book->id }}</td>
+                                            <td style="max-width: 200px; max-height: 100px"><img src="{{asset('../../'.$book->cover)}}" style="width: 100px; height:100px"></td>
+                                            <td><a href="#">{{ $book->title }}</a></td>
+                                            <td><a href="#">{{ $book->author }}</a></td>
+                                            <td>{{ $book->price }}Tk.</td>
+                                            <td>{{ $book->copies_available() }}</td>
+                                            <td>{{ $book->status }}</td>
+                                            <td>{{ $book->user->name }}</td>
+                                            <td>{{ $book->created_at->diffForHumans() }}</td>
+                                            <td>{{ $book->updated_at->diffForHumans() }}</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm" href="{{ route('book.edit', $book->id) }}"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-primary btn-sm" href="{{ route('book.show', $book->id) }}"><i class="fa fa-eye"></i></a>
+                                                <form action="{{route('book.destroy' ,$book->id)}}" method="POST" class="d-inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                                <input type="hidden" name="id" value="{{$book->id}}">
-                                                <button id="delteButton" class='btn btn-primary btn-sm ' onclick="return confirm('Are you sure?')"><span class='fa fa-trash delete'></span></button></form>
+                                                    <input type="hidden" name="id" value="{{$book->id}}">
+                                                    <button id="delteButton" class='btn btn-primary btn-sm ' onclick="return confirm('Are you sure?')"><span class='fa fa-trash delete'></span></button></form>
 
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @endif
-                                </tbody>
+                            </form>
+                            </td>
+                            </tr>
+                            @endif
+                            @endforeach
+                            @endif
+                            </tbody>
                             </table>
-</form>  
+                            </form>
                         </div>
                     </div>
                     <div class="row">
@@ -113,20 +118,19 @@
 
 
 @section('scripts')
-	<script>
-		$(document).ready(function(){
-			$('#check-all').click(function(){
-				if(this.checked){
-					$('.checkBoxes').each(function(){
-						this.checked = true;
-					});
-				} 
-				else{
-					$('.checkBoxes').each(function(){
-						this.checked = false;
-					});
-				}
-			});
-		});
-	</script>
+<script>
+    $(document).ready(function() {
+        $('#check-all').click(function() {
+            if (this.checked) {
+                $('.checkBoxes').each(function() {
+                    this.checked = true;
+                });
+            } else {
+                $('.checkBoxes').each(function() {
+                    this.checked = false;
+                });
+            }
+        });
+    });
+</script>
 @endsection

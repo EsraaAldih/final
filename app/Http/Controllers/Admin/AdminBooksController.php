@@ -65,27 +65,33 @@ class AdminBooksController extends Controller
     // }
 
 
-
-
-
     public function store(Request $request)
     {
-        $input = $request->all();
+        $this->validate($request, array(
+            'title' => 'required|unique:books,title',
+            'author' => 'required',
+            'price' => 'required|integer',
+        ));
+        if (request()->has('cover')){
+            $cover = request()->file('cover');
+            $cover_name = time().'.'.$cover->getClientOriginalExtension();
+            $cover_path = public_path('images/');
+            $cover->move($cover_path, $cover_name);
 
-        if($file = $request->file('cover')){
-            $name = time() . $file->getClientOriginalName();
-            $file->move('coverpages', $name);
-            $input['cover'] = $name;
+        $book = new Book();
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->price = $request->price;
+        $book->category = $request->category;
+        $book->status = $request->status;
+        $book->user_id = $request->user()->id;
+        $book->cover = 'images/'.$cover_name;
+
+        $book->save();
         }
-
-        Book::create($input);
-
-        Session::flash('Book_added', 'BOOK Added Successfully.');
-
-        return redirect()->back();
-    }
-
-
+             Session::flash('book_added', 'Book Added Successfully.');
+    
+           return redirect()->back();    }
 
 
 
