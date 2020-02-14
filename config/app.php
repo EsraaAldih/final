@@ -171,6 +171,7 @@ return [
         Laratrust\LaratrustServiceProvider::class,
         Cog\Laravel\Ban\Providers\BanServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Nexmo\Laravel\NexmoServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -235,7 +236,7 @@ return [
         'Laratrust'   => Laratrust\LaratrustFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class,
     ],
 
 ];

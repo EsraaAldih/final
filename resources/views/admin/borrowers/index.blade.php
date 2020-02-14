@@ -18,20 +18,7 @@
 				<div class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 					<div class="row">
 						<div class="col-sm-12">
-							<form action="delete/users" method="POST">
-								@csrf
-								<div class="btn-group">
-									<div class="animated-checkbox">
-										<label>
-											<input type="checkbox" id="check-all"><span class="label-text btn btn-dark"></span>
-										</label>
-									</div>
-									<div class="form-group">
-										<label>
-											{{ Form::button('<i class="fa fa-trash"></i>', ['type'=> 'submit', 'class'=>'btn btn-danger ml-2']) }}
-										</label>
-									</div>
-								</div>
+					
 								<div class="table-responsive-md">
 									<table class="table table-hover table-bordered">
 										<thead>
@@ -48,23 +35,30 @@
 										<tbody>
 											@foreach($borrowers as $borrower)
 
-											<tr>
+											<tr  @if ($borrower->status() != '1') class="text-success" @else class="text-danger" @endif>
 												<td>
 													<div class="animated-checkbox">
 														<label>
-															<input class="checkBoxes" type="checkbox" name="checkBoxArray[]" value="{{$borrower->id}}">
 															<span class="label-text"></span>
 														</label>
 													</div>
 												</td>
-												<td> {{ $borrower->borrower->name }}</td>
+												<td> {{ $borrower->id }}</td>
+												<td> {{ $borrower->user->name }}</td>
 												<td>{{ $borrower->user->email }} </td>
-												<td> </td>
+												<td> {{$borrower->book->title}}</td>
 
-												<td>{{$borrower->status()}} </td>
+												<td> {{$borrower->status()}} Days Left 
+											    	@if(($borrower->status())<=1)
+												     	<form action="{{ url('admin/sms') }}" method="POST" class="d-inline-block ml-2">
+												         	@csrf
+													     	<button class="btn btn-danger">SMS</button>
+												       </form>
+												 @endif
+												</td>
 												
 												<td>{{ $borrower->created_at->diffForHumans() }}</td>
-												<td>{{ $borrower->updated_at->diffForHumans() }}</td>
+											
 											</tr>
 
 											@endforeach
@@ -72,7 +66,6 @@
 										</tbody>
 									</table>
 								</div>
-							</form>
 						</div>
 					</div>
 				</div>

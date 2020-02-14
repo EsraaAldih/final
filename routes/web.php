@@ -142,6 +142,8 @@ Route::prefix('admin')->middleware('role:admin' ,'auth')->group(function(){
     
         //borrowers
         Route::get('/borrowers', 'AdminBorrowersController@borrower')->name('borrowers');
+        Route::post('/sms', 'Admin\AdminSmsController@sms')->name('sms');
+        
     
     
     

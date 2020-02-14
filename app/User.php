@@ -8,10 +8,15 @@ use Illuminate\Notifications\Notifiable;
 use Laravelista\Comments\Commenter;
 use willvincent\Rateable\Rateable;
 use Laratrust\Traits\LaratrustUserTrait;
+use Cog\Contracts\Ban\Bannable as BannableContract;
+use Cog\Laravel\Ban\Traits\Bannable;
 
 
-class User extends Authenticatable implements  MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail ,
+                                              BannableContract
 {
+    use Bannable;
+
     use LaratrustUserTrait;
     use Notifiable, Commenter, Rateable;
 

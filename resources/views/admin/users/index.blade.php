@@ -46,8 +46,9 @@
 												<th>Email</th>
 												<th>Role</th>
 												<th>Is Ban?</th>
-												<th></th>
+												<th>Action</th>
 												<th>Join</th>
+												<th>Updated</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -72,8 +73,24 @@
 													@endif
 
 												</td>
-											
+												<td>
+													@if($user->isBanned())
+													<label>Yes</label>
+													@else
+													<label>No</label>
+													@endif
+												</td>
 
+												<td>
+
+													@if($user->isbanned())
+													<a href="{{ route('users.revoke', $user->id) }}" class="button is-light m-r-5"> Revoke</a>
+													@else
+													<a href="{{ route('users.ban', $user->id) }}" class="button  m-r-5"> Ban</a>
+													@endif
+
+												</td>
+												<td>{{ $user->created_at->diffForHumans() }}</td>
 												<td>{{ $user->updated_at->diffForHumans() }}</td>
 											</tr>
 											@endif

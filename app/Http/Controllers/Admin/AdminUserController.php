@@ -10,9 +10,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Cog\Contracts\Ban\Bannable as BannableContract;
+use Cog\Laravel\Ban\Traits\Bannable;
 
-class AdminUserController extends Controller
+class AdminUserController extends Controller 
 {
+    use Bannable;
+
+    public function shouldApplyBannedAtScope()
+    {
+        return true;
+    }
 
     public function create()
     {
@@ -55,7 +63,7 @@ class AdminUserController extends Controller
         return redirect()->back();
     }
 
-    public function ban(Request $request, $id)
+      public function ban(Request $request, $id)
 
     {
         $user = User::where('id', $id)->first();
@@ -89,32 +97,8 @@ class AdminUserController extends Controller
     }
 
 
-    public function comment()
-    {
-        $comments = Comment::paginate(20);
-        return view('admin.users.comment', compact('comments'));
-    }
+   
 
-    public function deleteComment(Request $request)
-    {
-
-        $comments = Comment::findOrFail($request->checkBoxArray);
-        foreach ($comments as $comment) {
-
-            $book = Book::findOrFail($comment->book_id);
-
-            $book->decrement('reviews', 1);
-            $book->decrement('count_rating', $comment->rating);
-
-            $book['avg_rating'] = floor($book->count_rating / $book->reviews);
-            $book->save();
-
-            $comment->delete();
-        }
-        return redirect()->back();
-
-        return $request->all();
-    }
 
     public function delete(Request $request)
     {

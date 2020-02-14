@@ -41,43 +41,54 @@ class AdminBooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $this->validateData($request);
+    // public function store(Request $request)
+    // {
+    //     $this->validateData($request);
 
-        $input = $request->all();
-        $input['user_id'] = $request->user()->id;
+    //     $input = $request->all();
+    //     $input['user_id'] = $request->user()->id;
 
 
-        if (request()->has('cover')){
-            $cover = request()->file('cover');
-            $coverpage = time().'.'.$cover->getClientOriginalExtension();
-            $cover_path = public_path('coverpages/');
-            $cover->move($cover_path, $coverpage);
-            $input['cover'] = $coverpage;
-        }
+    //     if (request()->has('cover')){
+    //         $cover = request()->file('cover');
+    //         $coverpage = time().'.'.$cover->getClientOriginalExtension();
+    //         $cover_path = public_path('coverpages/');
+    //         $cover->move($cover_path, $coverpage);
+    //         $input['cover'] = $coverpage;
+    //     }
 
        
+    //     Book::create($input);
+    //     Session::flash('book_added', 'Book Added Successfully.');
+
+    //     return redirect()->back();
+    // }
+
+
+
+
+
+    public function store(Request $request)
+    {
+        $input = $request->all();
+
+        if($file = $request->file('cover')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('coverpages', $name);
+            $input['cover'] = $name;
+        }
+
         Book::create($input);
-        Session::flash('book_added', 'Book Added Successfully.');
+
+        Session::flash('Book_added', 'BOOK Added Successfully.');
 
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-  
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
+
     public function edit($id)
     {
         $book = Book::findOrFail($id);
@@ -165,6 +176,6 @@ class AdminBooksController extends Controller
     }
 
 
-    
+
 
 }

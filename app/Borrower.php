@@ -16,7 +16,7 @@ class Borrower extends Model
     public function book()
     {
 
-      return $this->hasMany('App\Book');
+      return $this->belongsTo('App\Book');
 
     }
 
@@ -26,8 +26,8 @@ class Borrower extends Model
         $issued = Carbon::parse($this->created_at);
         $issue_interval = DB::table('borrowers')->get()->first()->issue_interval;
         $days_left = $issue_interval - $today->diffInDays($issued);
-
-        return $days_left.' Days Left';
+       
+        return $days_left;
     }
 
 }

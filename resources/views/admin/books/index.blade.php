@@ -64,7 +64,7 @@
 													</div>
 												</td>
                                         <td>{{ $book->id }}</td>
-                                        <td><img src="{{asset('../../'.$book->cover)}}" alt="cover image of book"></td>
+                                        <td style="max-width: 200px; max-height: 100px"><img src="{{ asset('$book->cover')}}" style="width: 100px; height:100px"></td>
                                         <td><a href="#">{{ $book->title }}</a></td>
                                         <td><a href="#">{{ $book->author }}</a></td>
                                         <td>{{ $book->price }}Tk.</td>

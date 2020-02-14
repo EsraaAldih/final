@@ -13,7 +13,7 @@ class Book extends Model
     use SearchableTrait;
 
    protected $fillable = [
-        'title', 'description', 'price',  'author', 'category_id',  'cover',  'quantity', 'status', 'user_id'
+        'title', 'description', 'price',  'author', 'category_id',  'cover',  'quantity', 'status', 'user_id',
     ];
 
     protected $searchable =[
@@ -42,4 +42,11 @@ class Book extends Model
      }
    
 
+
+
+     protected $covers_location = '/images/';
+
+     public function getCoverAttribute($photo){
+         return $this->covers_location . $photo;
+     }
 }

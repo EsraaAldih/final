@@ -14,8 +14,8 @@ class AddBorrowerIdToBooksTable extends Migration
     public function up()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->bigInteger('borrower_id')->unsigned();
-            $table->foreign('borrower_id')->references('user_id')->on('borrowers')->nullable();
+            $table->bigInteger('borrower_id')->unsigned()->nullable();
+            $table->foreign('borrower_id')->references('user_id')->on('borrowers');
         });
     }
 
