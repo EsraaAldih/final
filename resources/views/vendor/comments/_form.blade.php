@@ -10,6 +10,7 @@
                 {{ $errors->get('commentable_id') }}
             </div>
         @endif
+        @if(!auth()->user()->hasRole('admin'))
         <form method="POST" action="{{ url('comments') }}" class="form-inline">
             @csrf
             @honeypot
@@ -48,5 +49,6 @@
 
           
         </form>
+        @endif
     </div>
 <br />

@@ -27,4 +27,12 @@ class AdminContactController extends Controller
         return redirect()->back();
     }
 
+
+    public function store(Request $request)
+    {
+        Contact::create($request->all());
+        
+        return redirect()->back();
+    }
+
 }

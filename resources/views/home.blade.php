@@ -120,7 +120,7 @@
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                <img src="{{asset($book->cover)}}" alt="IMG-PRODUCT" style="border: none; box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.2);">
+                                <img src="{{$book->cover}}" alt="IMG-PRODUCT" style="border: none; box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.2);">
 
                                 <div class="block2-overlay trans-0-4">
                                   
@@ -216,16 +216,16 @@
                         <h3>Quick Contact us</h3>
                         <h6>We are now offering some good discount
                             on selected books go and shop them</h6>
-                        <form>
+                        <form method="POST" action="{{route('contact.store')}}">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input placeholder="Name" required>
-                                </div>
+                                    <input placeholder="Name" required name='name'>
+                                </div> 
                                 <div class="col-md-6">
-                                    <input type="email" placeholder="Email" required>
+                                    <input type="email" placeholder="Email" name='email'required>
                                 </div>
                                 <div class="col-md-12">
-                                    <textarea placeholder="Messege"></textarea>
+                                    <textarea placeholder="Messege" name='msg'></textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <button class="btn black">Alright, Submit</button>

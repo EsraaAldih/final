@@ -69,7 +69,7 @@
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{route('books')}}"> My Book </a>
-                    <a class="dropdown-item" href="" data-toggle="modal" data-target="#shareBook">Share Book</a>
+                    <a class="dropdown-item" href="{{route('addBook')}}">Share Book</a>
                     <a class="dropdown-item" href="{{route('changePassword')}}" data-toggle="modal" data-target="#changePas">Change password</a>
                     <a class="dropdown-item" href="{{route('profileAvatar')}}" data-toggle="modal" data-target="#changePic">Upload Profile Picture</a></a>
                     <a href="{{ route('order.index') }}" class="dropdown-item">Orders <i class="fas fa-grip-horizontal ml-2"></i></a>

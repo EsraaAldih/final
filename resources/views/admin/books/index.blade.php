@@ -45,7 +45,6 @@
                                             <th>Title</th>
                                             <th>Author</th>
                                             <th>Price</th>
-                                            <th>Quantity</th>
                                             <th>Status</th>
                                             <th>Createor</th>
                                             <th>Created</th>
@@ -67,12 +66,18 @@
                                                 </div>
                                             </td>
                                             <td>{{ $book->id }}</td>
-                                            <td style="max-width: 200px; max-height: 100px"><img src="{{asset('../../'.$book->cover)}}" style="width: 100px; height:100px"></td>
+                                            <td style="max-width: 200px; max-height: 100px"><img src="{{ $book->cover }}" style="width: 100px; height:100px"></td>
                                             <td><a href="#">{{ $book->title }}</a></td>
                                             <td><a href="#">{{ $book->author }}</a></td>
-                                            <td>{{ $book->price }}Tk.</td>
-                                            <td>{{ $book->copies_available() }}</td>
-                                            <td>{{ $book->status }}</td>
+                                            <td>
+                                                @if( $book->price ==0)Free
+                                            @else
+                                            {{ $book->price }} L.E 
+                                            @endif
+                                            </td>
+                                            <td>@if( $book->status==1) Avaliable
+                                                @else Unavaliable
+                                            @endif</td>
                                             <td>{{ $book->user->name }}</td>
                                             <td>{{ $book->created_at->diffForHumans() }}</td>
                                             <td>{{ $book->updated_at->diffForHumans() }}</td>

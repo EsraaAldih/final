@@ -41,58 +41,25 @@ class AdminBooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     $this->validateData($request);
-
-    //     $input = $request->all();
-    //     $input['user_id'] = $request->user()->id;
-
-
-    //     if (request()->has('cover')){
-    //         $cover = request()->file('cover');
-    //         $coverpage = time().'.'.$cover->getClientOriginalExtension();
-    //         $cover_path = public_path('coverpages/');
-    //         $cover->move($cover_path, $coverpage);
-    //         $input['cover'] = $coverpage;
-    //     }
-
-       
-    //     Book::create($input);
-    //     Session::flash('book_added', 'Book Added Successfully.');
-
-    //     return redirect()->back();
-    // }
-
-
     public function store(Request $request)
     {
-        $this->validate($request, array(
-            'title' => 'required|unique:books,title',
-            'author' => 'required',
-            'price' => 'required|integer',
-        ));
-        if (request()->has('cover')){
-            $cover = request()->file('cover');
-            $cover_name = time().'.'.$cover->getClientOriginalExtension();
-            $cover_path = public_path('images/');
-            $cover->move($cover_path, $cover_name);
+        $this->validateData($request);
 
-        $book = new Book();
-        $book->title = $request->title;
-        $book->author = $request->author;
-        $book->price = $request->price;
-        $book->category = $request->category;
-        $book->status = $request->status;
-        $book->user_id = $request->user()->id;
-        $book->cover = 'images/'.$cover_name;
+        $input = $request->all();
+        $input['user_id'] = $request->user()->id;
 
-        $book->save();
+
+       
+        if($file = $request->file('cover')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('coverpages', $name);
+            $input['cover'] = $name;
         }
-             Session::flash('book_added', 'Book Added Successfully.');
-    
-           return redirect()->back();    }
+        Book::create($input);
+        Session::flash('book_added', 'Book Added Successfully.');
 
+        return redirect()->back();
+    }
 
 
     public function edit($id)
@@ -115,22 +82,18 @@ class AdminBooksController extends Controller
         $input = $request->all();
         $book = Book::findOrFail($id);
 
-        if (request()->has('cover')){
-            $cover = request()->file('cover');
-            $coverpage = time().'.'.$cover->getClientOriginalExtension();
-            $cover_path = public_path('coverpages/');
-            $cover->move($cover_path, $coverpage);
-            $input['cover'] = $coverpage;
+        if($file = $request->file('cover')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('coverpages', $name);
+            $input['cover'] = $name;
         }
 
-     
 
         $book->update($input);
 
         Session::flash('book_updated', 'Updated Successfully.');
 
         return redirect('admin/book');
-
     }
 
     /**
@@ -143,20 +106,23 @@ class AdminBooksController extends Controller
     {
         $book = Book::find($book);
         $book->delete();
-        return redirect()->route('book.index');  
-      }
+        return redirect()->route('book.index');
+    }
 
     protected function validateData(Request $request)
     {
-        $request->validate([
-            'description' => 'required'
-        ],
-        [
-          'description.required'  => 'Please provide Book\'s description',
+        $request->validate(
+            [
+                'description' => 'required'
+            ],
+            [
+                'description.required'  => 'Please provide Book\'s description',
 
-        ]);
+            ]
+        );
     }
-    public function show($book) {
+    public function show($book)
+    {
         $book = Book::find($book);
         return view('admin.books.book-details', compact('book'));
     }
@@ -176,12 +142,9 @@ class AdminBooksController extends Controller
 
 
 
-    public function borrower(){
+    public function borrower()
+    {
         $borrowers = Borrower::all();
-        return view('admin.borrowers.index',compact('borrowers'));
+        return view('admin.borrowers.index', compact('borrowers'));
     }
-
-
-
-
 }

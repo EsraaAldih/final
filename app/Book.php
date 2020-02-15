@@ -27,15 +27,57 @@ class Book extends Model
      ];
 
 
-     public function copies_available()
-     {
-         $total = $this->quantity;
-         $current_books = Order::where('book_id', $this->id)->count();
-         $available_copies = $total - $current_books;
- 
-         return $available_copies;
-     }
+    //  public function copies_available()
+    //  {
 
+    //     $orders= \App\Order::all();
+
+    //     foreach ($orders as $order) {
+    //         $books = Book::where('id', $order->cart->items->id);
+    //         $sum = 0;
+    //         foreach($orders as $order){
+    //             $sum += $order;
+    //         }
+          
+    //     }
+
+
+
+    //      $total = $this->quantity;
+    //      $current_books = Order::where('book_id', $this->id)->count();
+    //      $available_copies = $total - $current_books;
+ 
+    //      return $available_copies;
+    //  }
+
+
+
+    public function  copies_available(){
+        $users= \App\User::all();
+        
+        foreach($users as $user){
+            $orders = $user->orders;
+            $carts = $orders->transform( function( $cart, $key) {
+                return unserialize($cart->cart);
+            });
+           
+            foreach($carts as $cart){
+                foreach($cart->items as $item){
+                    $book= Book::where('id',$item['id'])->pluck('quantity');
+                    $quantity = $book[0];
+
+                }
+            }
+        }
+        return $quantity;
+// dd($quantity);
+    }
+
+    protected $sliders_location = '/coverpages/';
+
+    public function getCoverAttribute($photo){
+    	return $this->sliders_location . $photo;
+    }
 
     public function user()
     {

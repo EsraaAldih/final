@@ -26,13 +26,19 @@
 	                    </div>
 
 	                    <div class="row">
-	                         <div class="col-md-5 mb-3">
+	                         <div class="col-md-3 mb-3">
 	                            <div class="form-group">
 	                                {!! Html::decode(Form::label('author','Author: <span class="mustfillup">*</span>', ['class' => 'col-form-label'])) !!}
 									{!! Form::text('author', null, ['class'=>'form-control','required' => 'required']) !!}
 	                            </div>
-	                        </div>
-	                        <div class="col-md-4 mb-3">
+							</div>
+							<div class="col-md-3 mb-3">
+	                            <div class="form-group">
+	                                {!! Html::decode(Form::label('quantity','Quantity: <span class="mustfillup">*</span>', ['class' => 'col-form-label'])) !!}
+									{!! Form::text('quantity', null, ['class'=>'form-control','required' => 'required']) !!}
+	                            </div>
+							</div>
+	                        <div class="col-md-3 mb-3">
 	                            <div class="form-group">
 	                                {!! Html::decode(Form::label('category','Category: <span class="mustfillup">*</span>', ['class' => 'col-form-label'])) !!}
 	                                {!! Form::select('category_id', $categories, null, ['class'=>'select form-control', 'required' => 'required']) !!}

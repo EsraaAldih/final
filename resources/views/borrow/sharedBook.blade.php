@@ -95,7 +95,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                            <img src="{{asset($product->cover)}}" alt="IMG-PRODUCT" style="border: none; box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.2);">
+                            <img src="{{$product->cover}}" alt="IMG-PRODUCT" style="border: none; box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.2);">
 
                             <div class="block2-overlay trans-0-4" style="overflow: auto">
                                 <div class="block2-btn-addcart w-size1 trans-0-4">

@@ -79,7 +79,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                            <img src="{{asset($book->cover)}}" alt="IMG-PRODUCT" style="border: none; box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.2);">
+                            <img src="{{$book->cover}}" alt="IMG-PRODUCT" style="border: none; box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.2);">
 
                             <div class="block2-overlay trans-0-4">
 

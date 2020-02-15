@@ -31,8 +31,8 @@
             <div class="col-md-6 col-lg-3">
                 <div class="widget-small danger coloured-icon"><i class="icon fa fa-edit fa-3x"></i>
                     <div class="info">
-                        <h4>Writers</h4>
-                        <p><b></b></p>
+                        <h4>Borrowers</h4>
+                        <p><b>{{count($borrowers)}}</b></p>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 <div class="widget-small info coloured-icon"><i class="icon fa fa-shopping-cart fa-3x"></i>
                     <div class="info">
                         <h4>New Orders</h4>
-                        <p><b></b></p>
+                        <p><b>{{count($orders)}}</b></p>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fas fa-chart-bar"></i> Orders Ratio</div>
-                    <div class="card-body">
+                    <div class="card-body" style="height:550px">
                         <canvas id="myBarChart" width="100%" height="50"></canvas>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                     <div class="card-header">
                         <i class="fas fa-chart-pie"></i> Books
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="height:550px">
                         <canvas id="myPieChart" width="100%" height="100"></canvas>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
             type: "GET",
             url: "/admin/books-ratio",
             success: function(response) {
-                lineChart(response);
+                pieChart(response);
             },
             error: function(error) {
                 console.log(error);
@@ -103,7 +103,7 @@
             type: "GET",
             url: "/admin/orders-ratio",
             success: function(response) {
-                pieChart(response);
+                lineChart(response);
             },
             error: function(error) {
                 console.log(error);
@@ -115,7 +115,9 @@
 
 
         //Line Chart 
-    function lineChart(response){
+   
+     
+        function lineChart(response){
         var lineChart = document.getElementById("myBarChart");
         var myLineChart = new Chart(lineChart, {
           type: 'bar',
@@ -176,9 +178,6 @@
         });
 
     }
-
-
-
 
 </script>
 

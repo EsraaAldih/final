@@ -49,7 +49,7 @@
 												<td> {{$borrower->book->title}}</td>
 
 												<td> {{$borrower->status()}} Days Left 
-											    	@if(($borrower->status())<=1)
+											    	@if(($borrower->status())<=3)
 												     	<form action="{{ url('admin/sms') }}" method="POST" class="d-inline-block ml-2">
 												         	@csrf
 													     	<button class="btn btn-danger">SMS</button>

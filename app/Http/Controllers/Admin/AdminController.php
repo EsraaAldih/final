@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Book;
+use App\Borrower;
 use App\Order;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Cartalyst\Stripe\Api\Orders;
 
 class AdminController extends Controller
 {
@@ -21,14 +23,17 @@ class AdminController extends Controller
 
     public function index()
 	{
-		$users = User::all();
-		$books = Book::all();
-        return view('admin.index', compact('users', 'books'));
+		$users =     User::all();
+		$books =     Book::all();
+		$borrowers = Borrower::all();
+        $orders =    Order::all();
+        return view('admin.index', compact('users', 'books','borrowers', 'orders'));
     }
 
 
     public function getBooksRation(){
         $categories = Category::all();
+        // $books = Book::all();
         //$cat = json_decode($cat);
         $array1 = [];
         $array2 = [];
@@ -40,12 +45,13 @@ class AdminController extends Controller
         
         return $array;
     }
+
     public function getOrdersRation(){
         $categories = Category::all();
         $array1 = [];
         $array2 = [];
         foreach ($categories as $category) {
-            $orders = Book::where('category_id', $category->id)->pluck('sales');
+            $orders = Book::where('category_id', $category->id)->pluck('price');
             $sum = 0;
             foreach($orders as $order){
                 $sum += $order;
