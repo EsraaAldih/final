@@ -7,11 +7,23 @@
     <meta name="keywords" content="Fashi, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Open Book</title>
+    <title>BOOKIE</title>
 
     <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+<
     <!-- Css Styles -->
     <link rel="stylesheet" href="../fashi/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="../fashi/css/font-awesome.min.css" type="text/css">
@@ -38,19 +50,7 @@
     </div>
 
     <header>
-        <div class="header-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3"><a href="#" class="web-url">www.bookstore.com</a></div>
-                    <div class="col-md-6">
-                        <h5>Free Shipping Over $99 + 3 Free Samples With Every Order</h5>
-                    </div>
-                    <div class="col-md-3">
-                        <span class="ph-number">Call : 800 1234 5678</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
         <div class="main-menu">
             <div class="container">
                 @include('layouts.navbar')
@@ -59,7 +59,7 @@
         </div>
     </header>
 
-    <div class="register-login-section spad">
+    <div class="register-login-section p-1 m-1 ">
         <div class="container">
             @if($errors->any())
             <div class="alert alert-danger">
@@ -87,42 +87,26 @@
                             @csrf
                             <div class="group-input">
                                 <label for="title"><strong>Title:</strong></label>
-                                <input style="border: none;border-bottom:1px solid #ccc;border-radius:0" type="text" class="form-control" id="title" name="title">
+                                <input  type="text" class="form-control" id="title" name="title">
 
                             </div>
                             <div class="group-input">
                                 <label for="author"><strong>Author:</strong></label>
-                                <input style="border: none;border-bottom:1px solid #ccc;border-radius:0" type="text" class="form-control" id="author" name="author">
+                                <input  type="text" class="form-control" id="author" name="author">
                             </div>
-                            @if(auth()->user()->hasRole('book_store'))
-                            <div class="group-input">
-                                <label for="Quantity"><strong>Quantity:</strong></label>
-                                <input style="border: none;border-bottom:1px solid #ccc;border-radius:0" type="text" class="form-control" id="quantity" name="quantity">
-                            </div>
-                            <div class="group-input">
-                                <label for="author"><strong>Price:</strong></label>
-                                <input style="border: none;border-bottom:1px solid #ccc;border-radius:0" type="text" class="form-control" id="price" name="price">
-                            </div>
-                            @endif
-                            
                             <div class="group-input">
                                 <label for="category"><strong>Category:</strong></label>
-                                <select style="border: none;border-bottom:1px solid #ccc;border-radius:0" class="browser-default custom-select" id="category" name="category">
+                                <select  class="browser-default custom-select" name="category" style="padding: 20px 10px" id="category" >
                                     <option disabled selected>Open this select menu</option>
-                                    @foreach($categories as $category)
+                                       @foreach($categories as $category)
                                     <option value="{{$category->id}}"> {{$category->title}} </option>
                                     @endforeach
-                                    
                                 </select>
                             </div>
                             <div class="group-input">
-                                <label for="description"><strong>Description:</strong></label>
-                                <input style="border: none;border-bottom:1px solid #ccc;border-radius:0" type="text" class="form-control" id="description" name="description">
-                            </div>
-                            <div class="group-input">
                                 <label for="cover"><strong>Cover</strong></label>
-                                <div style="border: none;border-bottom:1px solid #ccc;border-radius:0">
-                                    <input type="file" name="cover" style="opacity:0" class="form-control">
+                                <div >
+                                    <input type="file" name="cover" class="form-control">
                                 </div>
 
                                 <input type="hidden" class="form-control" name="_token" value="{{csrf_token()}}">

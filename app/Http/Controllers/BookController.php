@@ -18,17 +18,17 @@ class BookController extends Controller
     public function index()
     {   
 
-        if(request()->has('category')){
-            $book = Book::where('category','=',request('category'))->where('price','!=',0)->paginate(5)->appends([
-                'category'=> request('category')
-             ]);;
-        }else{
-            $book = Book::where('price','!=',0)->paginate(9);
+        if (request()->has('category')) {
+            $book = Book::where('category', '=', request('category'))->where('price', '!=', 0)->paginate(5)->appends([
+                'category' => request('category')
+            ]);
+        } else {
+            $book = Book::where('price', '!=', 0)->where('status', "!=", 0)->paginate(9);
         }
 
 
         $books = Book::inRandomOrder()->take(4)->get();
-        $category = Book::all()->groupBy('category');
+        $category = \App\Category::all();
 
         return view('/home', [
             'books' => $book,

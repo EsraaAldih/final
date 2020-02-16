@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
             $table->integer('category_id');
             $table->integer('price');
             $table->boolean('status')->default(true);
-            $table->string('cover')->default("images/default.jpg");
+            $table->string('cover');
             $table->integer('quantity')->default("1");
             $table->timestamps();
 

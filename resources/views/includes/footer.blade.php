@@ -3,7 +3,7 @@
         <div class="row justify-content-end">
             <div class="col-6">
                 <div class=" footer_menu">
-                    <h4>Contract</h4>
+                    <h4>Contact</h4>
                     <ul>
                         <li>
                             <i class="fa fa-phone"></i>

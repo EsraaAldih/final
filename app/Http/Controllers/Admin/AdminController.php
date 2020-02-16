@@ -10,6 +10,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Cartalyst\Stripe\Api\Orders;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -65,22 +66,32 @@ class AdminController extends Controller
     }
  
 
-    public function mysearch(Request $request){
-        
-        if($request->has('search')){
-            $books = Book::search($request->get('search'))->get();
+   
+    public function search(Request $request)
+    {
 
-            return view('admin.search.searchBooks',compact('books'));
+        $request->validate([
+
+            'q' => 'required'
+        ]);
+        $q = $request->q;
+
+        $filteredBooks = Book::where('title', 'like', '%' . $q . '%')
+            ->orWhere('price', 'like', '%' . $q . '%')
+            ->get();
+        if ($filteredBooks->count()) {
+
+            return view('admin.search.searchBooks')->with([
+                'books' =>  $filteredBooks
+            ]);
+        } else {
+            Session::flash('search', ' faild.');
+
+            return view('admin.search.searchBooks')->with([
+                'status', "search failed ,, please try again"
+            ]);
         }
-        else{
-
-            $books = Book::get();
-
-        }
-        return view('admin.search.searchBooks',compact('books'));
     }
-
-
 
 
 

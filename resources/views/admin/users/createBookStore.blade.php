@@ -52,8 +52,8 @@
 	                    <div class="row">
 	                        <div class="col-md-6 mb-3">
 	                          <div class="form-group">
-									{!! Html::decode(Form::label('avatar','avatar: <span class="mustfillup">*</span>', ['class' => 'col-form-label'])) !!}
-	                                {!! Form::file('avatar', ['class'=>'form-control', 'required' => 'required']) !!}
+									{!! Html::decode(Form::label('cover','Cover: <span class="mustfillup">*</span>', ['class' => 'col-form-label'])) !!}
+	                                {!! Form::file('cover', ['class'=>'form-control', 'required' => 'required']) !!}
 	                          </div>
 
 	                        </div>

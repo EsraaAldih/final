@@ -1,7 +1,24 @@
 @extends('layouts.backend')
 
 @section('content')
+<div class="app-title">
+    <div>
+        <h1><i class="fa fa-book"></i>Result</h1>
+    </div>
 
+    <form method="POST" action="{{url('admin/search')}}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" id="q" name="q" class="form-control" placeholder="Search Books" value="{{ old('search') }}">
+                        </div>
+                        <div class="col-md-6">
+                            @csrf
+
+                            <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+</div>
 
 <div class="row">
     <div class="col-md-12">
@@ -51,6 +68,7 @@
                                                 </td>
                                                 <td> {{ $book->title }}</td>
                                                 <td> {{ $book->price }}</td>
+                                                <td> {{ $book->category->title }}</td>
                                             </tr>
 
                                             @endforeach

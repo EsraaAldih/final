@@ -30,8 +30,14 @@ class AdminContactController extends Controller
 
     public function store(Request $request)
     {
-        Contact::create($request->all());
-        
+        $input=[
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'msg'=>$request->msg,
+        ];
+        Contact::create($input); 
+        Session::flash('msg_sent', 'Message has been sent Successfully.');
+    
         return redirect()->back();
     }
 

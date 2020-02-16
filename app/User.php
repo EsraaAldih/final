@@ -12,7 +12,7 @@ use Cog\Contracts\Ban\Bannable as BannableContract;
 use Cog\Laravel\Ban\Traits\Bannable;
 
 
-class User extends Authenticatable implements MustVerifyEmail, BannableContract
+class User extends Authenticatable implements BannableContract
 {
     use Bannable;
 
@@ -24,6 +24,11 @@ class User extends Authenticatable implements MustVerifyEmail, BannableContract
      *
      * @var array
      */
+    public function shouldApplyBannedAtScope()
+    {
+        return true;
+    }
+    
     protected $fillable = [
         'name', 'email', 'password', 'cover' , 'email_verified_at', 'banned_at'
     ];

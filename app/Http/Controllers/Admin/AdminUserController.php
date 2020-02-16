@@ -34,17 +34,17 @@ class AdminUserController extends Controller
             'email' => 'required|email|unique:users'
         ]);
 
-        if (request()->has('avatar')) {
-            $avatar = request()->file('avatar');
-            $avatar_name = time() . '.' . $avatar->getClientOriginalExtension();
-            $avatar_path = public_path('coverpages/');
-            $avatar->move($avatar_path, $avatar_name);
+        if (request()->has('cover')) {
+            $cover = request()->file('cover');
+            $cover_name = time() . '.' . $cover->getClientOriginalExtension();
+            $cover_path = public_path('coverpages/');
+            $cover->move($cover_path, $cover_name);
 
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->avatar = $request->avatar;
+            $user->cover = $request->cover;
             $user->save();
             $user->attachRole('book_store');
         } else {
@@ -104,8 +104,8 @@ class AdminUserController extends Controller
     {
         $users = User::findOrFail($request->checkBoxArray);
         foreach ($users as $user) {
-            if (is_file(public_path() . $user->avatar)) {
-                unlink(public_path() . $user->avatar);
+            if (is_file(public_path() . $user->cover)) {
+                unlink(public_path() . $user->cover);
             }
             $user->delete();
         }

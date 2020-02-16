@@ -17,14 +17,15 @@ class Book extends Model
         'title', 'description', 'price',  'author', 'category_id',  'cover',  'quantity', 'status', 'user_id',
     ];
 
-    protected $searchable =[
-        'colomns'=> [
-                'books.title' =>10,
-                'books.price' => 10,
-                'books.author' =>10,
 
+    protected $searchable = [
+        'columns' => [
+            'books.title' => 10,
+            'books.author' => 10,
+            'books.category' => 5,
+            'books.price' => 3,
         ]
-     ];
+    ];
 
 
     //  public function copies_available()
@@ -88,6 +89,12 @@ class Book extends Model
     {
 
       return $this->belongsTo('App\Borrower');
+
+    }
+    public function category()
+    {
+
+      return $this->belongsTo('App\Category');
 
     }
     public function wishlist(){

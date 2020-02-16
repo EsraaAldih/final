@@ -15,8 +15,8 @@ class CategoryTableSedeer extends Seeder
         \App\Category::create(['title'=>'Histroy']);
         \App\Category::create(['title'=>'non-Fiction']);
         \App\Category::create(['title'=>'classics']);
-        \App\Category::create(['title'=>'Historical-Fiction ']);
-        \App\Category::create(['title'=>'CHildern']);
+        \App\Category::create(['title'=>'Historical-Fiction']);
+        \App\Category::create(['title'=>'Childern']);
         \App\Category::create(['title'=>'Biography']);
         \App\Category::create(['title'=>'Horror ']);
         \App\Category::create(['title'=>'Thriller ']);

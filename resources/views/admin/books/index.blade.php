@@ -6,6 +6,19 @@
     <div>
         <h1><i class="fa fa-book"></i> Book</h1>
     </div>
+
+    <form method="POST" action="{{url('admin/search')}}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" id="q" name="q" class="form-control" placeholder="Search Books" value="{{ old('search') }}">
+                        </div>
+                        <div class="col-md-6">
+                            @csrf
+
+                            <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
 </div>
 
 <div class="row">
@@ -46,6 +59,7 @@
                                             <th>Author</th>
                                             <th>Price</th>
                                             <th>Status</th>
+                                            <th>Category</th>
                                             <th>Createor</th>
                                             <th>Created</th>
                                             <th>Updated</th>
@@ -78,6 +92,8 @@
                                             <td>@if( $book->status==1) Avaliable
                                                 @else Unavaliable
                                             @endif</td>
+                                            
+                                            <td>{{ $book->category->title }}</td>
                                             <td>{{ $book->user->name }}</td>
                                             <td>{{ $book->created_at->diffForHumans() }}</td>
                                             <td>{{ $book->updated_at->diffForHumans() }}</td>

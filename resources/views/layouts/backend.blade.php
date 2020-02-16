@@ -14,7 +14,6 @@
 
     <!-- Main CSS-->
     <link href="{{ asset('css/bookshop.bundle.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/vue.js') }}" ></script>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css " rel="stylesheet">
 
     @yield('styles')
@@ -30,27 +29,15 @@
         <ul class="app-nav">
             <li class="app-search">
 
-                <form method="GET" action="{{url('/search')}}">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" name="search" id="search" class="form-control" placeholder="Search Books" value="{{ old('search') }}">
-                        </div>
-                        <div class="col-md-6">
-                            <button class="btn"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </form>
-
                 <form method="POST" action="{{route('order')}}">
-                    @csrf
                     <div class="row">
-                        <div class="col-md-8">
-                            <input type="text" name="order" id="search" class="form-control app-search__input" placeholder="Search Order">
+                        <div class="col-md-6">
+                            <input type="text" name="search" class="form-control" placeholder="Search Orders" value="{{ old('search') }}">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
+                            @csrf
 
-                           <button class="btn btn app-search__button"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-primary"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </form>
@@ -123,15 +110,15 @@
                         </a>
                     </li>
                     <li>
-                    <a href="{{url('admin/chat')}}" class="nav-link cart  my-2 my-lg-0" role="button">
-                    <span><i class="fa fa-envelope" style=" font-size:17px;" aria-hidden="true"></i></span>
-                    <span class="quntity">
-                        {{DB::table('messages')
+                        <a href="{{url('admin/chat')}}" class="nav-link cart  my-2 my-lg-0" role="button">
+                            <span><i class="fa fa-envelope" style=" font-size:17px;" aria-hidden="true"></i></span>
+                            <span class="quntity">
+                                {{DB::table('messages')
                     ->where('read',0)
                     ->where('to',Auth::user()->id)
                     ->count()}}
-                    </span>
-                </a>
+                            </span>
+                        </a>
                     </li>
                 </ul>
             </li>

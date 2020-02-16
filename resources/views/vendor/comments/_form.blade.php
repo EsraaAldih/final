@@ -1,4 +1,10 @@
 
+<style>
+    input.mr-5::placeholder{
+        font-size: 13px;
+}
+</style>
+
     <div class="comment">
         @if($errors->has('commentable_type'))
             <div class="alert alert-danger" role="alert">
@@ -10,7 +16,6 @@
                 {{ $errors->get('commentable_id') }}
             </div>
         @endif
-        @if(!auth()->user()->hasRole('admin'))
         <form method="POST" action="{{ url('comments') }}" class="form-inline">
             @csrf
             @honeypot
@@ -40,7 +45,7 @@
             @endif
           
             <div class="form-group">
-                <input style=" border:none; border-bottom:1px solid #ccc ;border-radius:0;" class="mr-5 form-control @if($errors->has('message')) is-invalid @endif" name="message" placeholder="Leave a comment" autocomplete="off"></input>
+                <input style=" border:none; border-bottom:1px solid #ccc ;border-radius:0;" class="mr-5 py-4 form-control @if($errors->has('message')) is-invalid @endif" name="message" placeholder="Leave a comment" autocomplete="off"></input>
                 <div class="invalid-feedback">
                     Your message is required.
                 </div>
@@ -49,6 +54,5 @@
 
           
         </form>
-        @endif
     </div>
 <br />

@@ -18,7 +18,6 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'BookController@index')->name('home');
 Route::get('/view/{id}', 'BookController@view')->name('book.view');
 
-Route::post('/contact', 'Admin\AdminContactController@store')->name('contact.store');
 
 
 
@@ -58,10 +57,12 @@ Route::get('invoice/{amount}', 'CartController@generatePDF')->name('invoice');
 
 Route::resource('/wishlist', 'WishlistController', ['except' => ['create', 'edit', 'show', 'update']]);
 
-
 // chat
 Route::get('/chat', 'HomeController@index')->name('chat');
 Route::get('/contacts', 'ContactsController@get');
+Route::get('/contact', 'ContactsController@normalget');
+
+// Route::get('/contacts', 'ContactsController@normalget');
 Route::get('/conversation/{id}', 'ContactsController@getMessagesFor');
 Route::post('/conversation/send', 'ContactsController@send');
 Route::post('/conversation/send/{id}', 'ContactsController@sendMessage')->name('send.message');
@@ -71,6 +72,7 @@ Route::post('/conversation/send/{id}', 'ContactsController@sendMessage')->name('
 Route::get('/showRate/{user}', 'RateController@rateNotification')->name('rateNotification')->middleware('auth');
 Route::get('/rateUser/{user}', 'RateController@rateUser')->name('rateUser')->middleware('auth');
 Route::post('/rateUser/{user}', 'RateController@rateShow')->name('rateShow')->middleware('auth');
+Route::get('/rateBorrower/{user}', 'RateController@rateBorrower')->name('rateBorrower');
 //------------------------------------------------------------------------------------------------------------
 
 route::get('/approveNotification/{id}/{product}', 'NotificationController@approveNotification')->name('approve.notification');
@@ -83,6 +85,7 @@ Route::get('/borrow/{product}/{id}', 'NotificationController@borrowRequest')->na
 Route::get('/sharedBook', 'ProductController@sharedBook')->name('sharedBook')->middleware('auth');
 Route::get('/sharedBook/recieved/{product}', 'NotificationController@recievedBook')->name('recievedBook')->middleware('auth');
 
+Route::POST('/contact_us', 'Admin\AdminContactController@store')->name('contact_us.store');
 
 
 
@@ -127,12 +130,14 @@ Route::prefix('admin')->middleware('role:admin', 'auth')->group(function () {
 
     // //searching
     // Route::get('/search/{id}', ['as'=>'search', 'uses'=>'Admin\AdminController@singleSearch']);
-    // Route::get('/search', 'Admin\AdminController@showSearchResult')->name('books.search');
+     Route::post('/search', 'Admin\AdminController@search')->name('books.search')
+;
 
 
     //users contact
     Route::get('/contact', 'Admin\AdminContactController@index');
     Route::post('/delete/messages', 'Admin\AdminContactController@delete');
+
 
 
 
@@ -159,6 +164,8 @@ Route::prefix('admin')->middleware('role:admin', 'auth')->group(function () {
 
     //chat
     Route::get('/chat', 'Admin\AdminChatController@index');
+
+Route::get("search","HomeController@search");
 
 
 });

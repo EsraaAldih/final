@@ -21,6 +21,7 @@ class BooksTableSedeer extends Seeder
                 'quantity'=>rand(1,20),
                 'user_id'=>rand(1,4),
                 'status' => rand(0, 1),
+                'cover'=> rand(1, 25).'.jpg'
             ]);
          
 
