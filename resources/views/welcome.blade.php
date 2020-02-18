@@ -435,7 +435,7 @@ $(document).ready(function(){
                             on selected books go and shop them</h6>
                             <form method="POST" action="{{url('/contact_us')}}">
                             @csrf
-                            <div class="row">
+                                                        <div class="row">
                                 <div class="col-md-6">
                                     <input placeholder="Name" name="name" required>
                                 </div>

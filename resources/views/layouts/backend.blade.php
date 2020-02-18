@@ -43,11 +43,17 @@
                 </form>
             </li>
             <!--Notification Menu-->
-            <li>
-                <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications">
-                    <i class="fa fa-bell-o fa-lg"></i>
-                </a>
-            </li>
+            <li class="mt-2">
+                        <a href="{{url('admin/chat')}}" class="nav-link cart  my-2 my-lg-0 text-light " role="button">
+                            <span><i class="fa fa-envelope" style=" font-size:17px;" aria-hidden="true"></i></span>
+                            <span class="quntity">
+                                {{DB::table('messages')
+                    ->where('read',0)
+                    ->where('to',Auth::user()->id)
+                    ->count()}}
+                            </span>
+                        </a>
+                    </li>
             <!-- User Menu-->
             <li class="dropdown">
                 <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">
@@ -64,6 +70,7 @@
                             <i class="fa fa-user fa-lg"></i> Profile
                         </a>
                     </li>
+                
                     <li>
 
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -109,17 +116,7 @@
                             <i class="icon fa fa-angle-right"></i> Add Book
                         </a>
                     </li>
-                    <li>
-                        <a href="{{url('admin/chat')}}" class="nav-link cart  my-2 my-lg-0" role="button">
-                            <span><i class="fa fa-envelope" style=" font-size:17px;" aria-hidden="true"></i></span>
-                            <span class="quntity">
-                                {{DB::table('messages')
-                    ->where('read',0)
-                    ->where('to',Auth::user()->id)
-                    ->count()}}
-                            </span>
-                        </a>
-                    </li>
+
                 </ul>
             </li>
 
